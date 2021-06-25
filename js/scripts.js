@@ -20,8 +20,7 @@ $(document).ready(() => {
     ball = $('#ball');
     ball2 = $('#ball2');
 
-    stage = getBoxBounds();
-    b = getBallBounds();        //get ball coordinates..      
+    stage = getBoxBounds();    //get ball coordinates..      
     //intv = setInterval(() => animate(), time);
 
     balls = [ball, ball2];
@@ -41,39 +40,39 @@ const getBoxBounds = () => {
     };
 }
 
-const getBallBounds = () => {
-    let { left: x, top: y } = ball.offset();
-    let r = parseInt(noPx(ball.css('width'))) / 2;
+const getBallBounds = (b) => {
+    let { left: x, top: y } = b.offset();
+    let r = parseInt(noPx(b.css('width'))) / 2;
     return {
         x, y,
-        'radius': noPx(ball.css('width')),
-        'diameter': noPx(ball.css('height')),
+        'radius': noPx(b.css('width')),
+        'diameter': noPx(b.css('height')),
     };
 }
 
 
-const animate = (b) => {
+const animate = () => {
 
     //for the xdirection... 
     //if the ball's x position - the ball's radius is less than 0 and 
     // the velocity is less than 0 ~ (reverse the velocity.. )
     //also if the ball's x position is greater than the stage-Width - the ball radius
     //and the velocity is greater than 0 reverse the velocity... 
+    //for the ydirection... 
+    //repeat the same logic for the y position and the y velocity... 
+    //console.log(bounds, vx, vy);
+    //update the position object using the speed times the current velocity. 
+    //animate the ball to the new positions... 
+
     if (b.x - b.radius < 0 && vx < 0) vx = -vx;
     if (b.x + b.radius > stage.width - b.radius && vx > 0) vx = -vx;
 
-    //for the ydirection... 
-    //repeat the same logic for the y position and the y velocity... 
     if (b.y - b.radius < 0 && vy < 0) vy = -vy;
     if (b.y + b.radius > stage.height - b.radius && vy > 0) vy = -vy;
 
-    //console.log(bounds, vx, vy);
-
-    //update the position object using the speed times the current velocity. 
     pos.x = b.x += vx * speed;              //update with velocity..
     pos.y = b.y += vy * speed;
 
-    //animate the ball to the new positions... 
     gsap.to(ball, 0.1, {
         "left": pos.x + "px", "top": pos.y + "px", onComplete: () => {
             gsap.killTweensOf(ball);
