@@ -9,16 +9,23 @@ let ball,
     y = 0,
     speed = 10,
     vx = vy = 18,        //velocity..
-    intv = null;
+    intv = null,
+
+    //array of balls.... 
+    balls = [];
 
 
 $(document).ready(() => {
     box = $('#box');
     ball = $('#ball');
+    ball2 = $('#ball2');
 
     stage = getBoxBounds();
     b = getBallBounds();        //get ball coordinates..      
     //intv = setInterval(() => animate(), time);
+
+    balls = [ball, ball2];
+
     animate();
 });
 
@@ -45,7 +52,7 @@ const getBallBounds = () => {
 }
 
 
-const animate = () => {
+const animate = (b) => {
 
     //for the xdirection... 
     //if the ball's x position - the ball's radius is less than 0 and 
