@@ -1,11 +1,14 @@
 let ball,
     box,
     stage,
-    pos = {},
+    pos = {
+        x: 50,
+        y: 100
+    }, // you could initialize the positions of the ball... 
     x = 0,
     y = 0,
-    speed = 30,
-    vx = vy = 5,        //velocity..
+    speed = 10,
+    vx = vy = 18,        //velocity..
     intv = null;
 
 
@@ -64,7 +67,12 @@ const animate = () => {
     pos.y = b.y += vy * speed;
 
     //animate the ball to the new positions... 
-    gsap.to(ball, 0.2, { "left": pos.x + "px", "top": pos.y + "px", onComplete: () => animate() });
+    gsap.to(ball, 0.1, {
+        "left": pos.x + "px", "top": pos.y + "px", onComplete: () => {
+            gsap.killTweensOf(ball);
+            animate();
+        }
+    });
 
 }
 
