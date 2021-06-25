@@ -7,8 +7,8 @@ let ball,
     }, // you could initialize the positions of the ball... 
     x = 0,
     y = 0,
-    speed = 10,
-    vx = vy = 18,        //velocity..
+    speed = 1,
+    vx = vy = 2,        //velocity..
     intv = null,
 
     //array of balls.... 
@@ -23,7 +23,7 @@ $(document).ready(() => {
     stage = getBoxBounds();    //get ball coordinates..      
     //intv = setInterval(() => animate(), time);
 
-    balls = [ball, ball2];
+    balls = [ball];
 
     animate();
 });
@@ -68,7 +68,7 @@ const animate = () => {
 
         b = getBallBounds(ball); //
 
-        vx = vx * Math.random() * index;
+        vx = vx * Math.random() * 7;
         vy = vy * Math.random() * index;
 
         if (b.x - b.radius < 0 && vx < 0) vx = -vx;
