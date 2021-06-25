@@ -64,21 +64,32 @@ const animate = () => {
     //update the position object using the speed times the current velocity. 
     //animate the ball to the new positions... 
 
-    if (b.x - b.radius < 0 && vx < 0) vx = -vx;
-    if (b.x + b.radius > stage.width - b.radius && vx > 0) vx = -vx;
+    balls.forEach((ball, index) => {
 
-    if (b.y - b.radius < 0 && vy < 0) vy = -vy;
-    if (b.y + b.radius > stage.height - b.radius && vy > 0) vy = -vy;
+        b = getBallBounds(ball); //
 
-    pos.x = b.x += vx * speed;              //update with velocity..
-    pos.y = b.y += vy * speed;
+        vx = vx * Math.random() * index;
 
-    gsap.to(ball, 0.1, {
-        "left": pos.x + "px", "top": pos.y + "px", onComplete: () => {
-            gsap.killTweensOf(ball);
-            animate();
-        }
-    });
+        if (b.x - b.radius < 0 && vx < 0) vx = -vx;
+        if (b.x + b.radius > stage.width - b.radius && vx > 0) vx = -vx;
+
+        if (b.y - b.radius < 0 && vy < 0) vy = -vy;
+        if (b.y + b.radius > stage.height - b.radius && vy > 0) vy = -vy;
+
+        pos.x = b.x += vx * speed;              //update with velocity..
+        pos.y = b.y += vy * speed;
+
+        gsap.to(ball, 0.1, {
+            "left": pos.x + "px", "top": pos.y + "px", onComplete: () => {
+                gsap.killTweensOf(ball);
+                animate();
+            }
+        });
+
+
+    }); //for each ball.. do this... 
+
+
 
 }
 
