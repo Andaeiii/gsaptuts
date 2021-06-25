@@ -69,6 +69,7 @@ const animate = () => {
         b = getBallBounds(ball); //
 
         vx = vx * Math.random() * index;
+        vy = vy * Math.random() * index;
 
         if (b.x - b.radius < 0 && vx < 0) vx = -vx;
         if (b.x + b.radius > stage.width - b.radius && vx > 0) vx = -vx;
@@ -82,7 +83,7 @@ const animate = () => {
         gsap.to(ball, 0.1, {
             "left": pos.x + "px", "top": pos.y + "px", onComplete: () => {
                 gsap.killTweensOf(ball);
-                animate();
+                animate(ball);
             }
         });
 
